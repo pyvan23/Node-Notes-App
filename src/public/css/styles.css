@@ -1,0 +1,19 @@
+.jumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color:transparent;
+    border-radius: .6rem ;
+    border: solid 2px 
+
+  }
+  #border{
+    border-radius: 155%;
+    border: solid 4px ;
+    border-color: black;
+  }
+  body{
+    background: #FF416C;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #FF4B2B, #FF416C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  }
