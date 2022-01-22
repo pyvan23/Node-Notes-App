@@ -1,0 +1,22 @@
+<div class="row">
+    {{#each notes}}
+    <div class="card w-75 mt-3 ">
+        <div class="card-body">
+            <h5 class="card-title d-flex justify-content-between aling-items-center">{{title}} <a href="#">
+                    <i class="fas fa-pencil-alt"></i></i>
+                </a></h5>
+            <p class="card-text">{{description}}</p>
+            <a href="#" class="btn btn-dark btn-sm ">Delete</a>
+        </div>
+    </div>
+    {{else}}
+    <div class="card border-danger mb-3" style="max-width: 18rem;">
+        <div class="card-header">Header</div>
+        <div class="card-body text-danger">
+            <h5 class="card-title">Empty!!</h5>
+            <p class="card-text">You must insert notes!!</p>
+            <a href="/notes/add" class="btn btn-succes">Create one!!</a>
+        </div>
+    </div>
+    {{/each}}
+</div>

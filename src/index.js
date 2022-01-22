@@ -4,6 +4,8 @@ const exphbs = require("express-handlebars");
 const methodOverride = require("method-override");
 const session = require("express-session");
 
+
+
 //initialization
 const app = express();
 require("./datebase");
@@ -23,8 +25,12 @@ app.engine(
 app.set("view engine", ".hbs");
 
 //middelwaares
+
+
+
+
 //para recibir los datos y que podamos entederlo,false por que solo recibimos datos no imagenes
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended:false }));
 //nos sirve para que los formularios puedaan enviar mas metdos que solo post y get
 app.use(methodOverride("_method"));
 //para guardar las sesiones de los usuarios,poder autenticar a el usuario y poder almacenar las sesiones temporalmente
@@ -35,6 +41,7 @@ app.use(
     saveUninitialized: true,
   })
 );
+
 //Global vriables
 //routes
 
