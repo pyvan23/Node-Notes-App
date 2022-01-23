@@ -43,14 +43,14 @@ app.use(
   })
 );
 //nos permitecrear carteles confirmando las operaciones como borrado,actualizacion etc
-//app.use(flash());
+app.use(flash());
 
 //Global vriables (usamos el next por que va a seguir procesando y atorarse y siga con las demas rutas ya que node es de un solo hilo)
-/*app.use((req, res, next) => {
-  res.locals.success_msg = req.flash("Success_msg");
-  res.locals.error_msg = req.flash("error_msg");
+app.use((req, res, next) => {
+  res.locals.success_m = req.flash("success_m");
+  res.locals.error_m = req.flash("error_m");
   next();
-});*/
+});
 
 //routes
 

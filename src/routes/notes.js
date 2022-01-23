@@ -8,7 +8,7 @@ router.get("/notes/add", (req, res) => {
 
 router.post("/notes/new-note", async (req, res) => {
   const { title, description } = req.body;
-  
+
   const errors = [];
   if (!title) {
     errors.push({ text: "you need to put a title,please" });
@@ -21,11 +21,11 @@ router.post("/notes/new-note", async (req, res) => {
       errors,
       title,
       description,
-    });
+    })
   } else {
     const newNote = new Note({ title, description });
     await newNote.save();
-   
+    req.flash("success_m"," It was save it");
     res.redirect("/notes");
   }
 });
@@ -47,10 +47,12 @@ router.put("/notes/edit-note/:id", async (req, res) => {
   const { title, description } = req.body;
   //buscamospor id y actualizamos,le pasamosel id desde el params,y actualizamos title des...
   await Note.findByIdAndUpdate(req.params.id, { title, description });
+  req.flash("success_m","It was updated successfully");
   res.redirect("/notes");
 
   router.delete("/notes/delete/:id", async (req, res) => {
     await Note.findByIdAndRemove(req.params.id);
+    req.flash("success_m","It Was Deleted");
     res.redirect("/notes");
   });
 });
