@@ -2,21 +2,31 @@
     {{#each notes}}
     <div class="card w-75 mt-3 ">
         <div class="card-body">
-            <h5 class="card-title d-flex justify-content-between aling-items-center">{{title}} <a href="#">
+            <h5 class="card-title d-flex justify-content-between aling-items-center">{{title}}
+                <a href="/notes/edit/{{_id}}">
                     <i class="fas fa-pencil-alt"></i></i>
-                </a></h5>
-            <p class="card-text">{{description}}</p>
-            <a href="#" class="btn btn-dark btn-sm ">Delete</a>
+                </a>
+            </h5>
         </div>
+
+
+        <p class="card-text">{{description}}</p>
+        <!---hacemos otra consulta con ?_method de delete gracias al method override que nos permite usar delete  y put,reemplaza al metodo post-->
+        <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button class="btn btn-dark" type="submit">Delete</button>
+        </form>
     </div>
     {{else}}
+
     <div class="card border-danger mb-3" style="max-width: 18rem;">
-        <div class="card-header">Header</div>
+        <div class="card-header"><strong>Node Notes App</strong></div>
         <div class="card-body text-danger">
             <h5 class="card-title">Empty!!</h5>
             <p class="card-text">You must insert notes!!</p>
-            <a href="/notes/add" class="btn btn-succes">Create one!!</a>
+            <a href="/notes/add" class="btn btn-success  ">Create one!!</a>
         </div>
     </div>
+
     {{/each}}
 </div>

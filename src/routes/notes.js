@@ -8,7 +8,7 @@ router.get("/notes/add", (req, res) => {
 
 router.post("/notes/new-note", async (req, res) => {
   const { title, description } = req.body;
-
+  
   const errors = [];
   if (!title) {
     errors.push({ text: "you need to put a title,please" });
@@ -25,6 +25,7 @@ router.post("/notes/new-note", async (req, res) => {
   } else {
     const newNote = new Note({ title, description });
     await newNote.save();
+   
     res.redirect("/notes");
   }
 });
@@ -32,9 +33,26 @@ router.post("/notes/new-note", async (req, res) => {
 router.get("/notes", async (req, res) => {
   //voy a consultar la base de datos Note es el esquema,nos permite operar con la bese de datos
   //es un  proceso asincrono la consulta a la basse de datos asi que async and await
-  const notes = await Note.find().lean().sort({date:'desc'});
+  const notes = await Note.find().sort({ date: "desc" });
   //la constante notes va a recibir unn arreglo
   res.render("notes/all-notes", { notes });
+});
+
+router.get("/notes/edit/:id", async (req, res) => {
+  const note = await Note.findById(req.params.id);
+  res.render("notes/edit-note", { note });
+});
+
+router.put("/notes/edit-note/:id", async (req, res) => {
+  const { title, description } = req.body;
+  //buscamospor id y actualizamos,le pasamosel id desde el params,y actualizamos title des...
+  await Note.findByIdAndUpdate(req.params.id, { title, description });
+  res.redirect("/notes");
+
+  router.delete("/notes/delete/:id", async (req, res) => {
+    await Note.findByIdAndRemove(req.params.id);
+    res.redirect("/notes");
+  });
 });
 
 module.exports = router;
