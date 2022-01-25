@@ -16,7 +16,7 @@ passport.use(
         return done(null, false, { message: "The user doesn`t exist " });
       } else {
         //validamos la contraseña del usuario que existe en la bd
-        const match = User.matchPasword(password);
+        const match = user.matchPassword(password);
         if (match) {
           //null para el error,que no hay,y le  devuelvo el usuario
           return done(null, user);
@@ -27,3 +27,13 @@ passport.use(
     }
   )
 );
+//toma un user y un callback,gurdamos en una sesion el id del usuario,para evitar pedir el login constantemente
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+//si hay un usuario en la sesion,busca el id del usuario
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    done(err, user);
+  });
+});

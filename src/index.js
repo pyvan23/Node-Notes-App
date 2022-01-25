@@ -5,10 +5,12 @@ const methodOverride = require("method-override");
 const session = require("express-session");
 const flash = require("connect-flash");
 const handlebars = require("handlebars");
+const passport = require("passport");
 
 //initialization
 const app = express();
 require("./datebase");
+require("./config/passport");
 
 //Setting
 app.set("port", process.env.PORT || 3000);
@@ -43,12 +45,16 @@ app.use(
   })
 );
 //nos permitecrear carteles confirmando las operaciones como borrado,actualizacion etc
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
 
 //Global vriables (usamos el next por que va a seguir procesando y atorarse y siga con las demas rutas ya que node es de un solo hilo)
 app.use((req, res, next) => {
   res.locals.success_m = req.flash("success_m");
   res.locals.error_m = req.flash("error_m");
+  res.locals.error = req.flash("error");
+  res.locals.user = req.user || null;
   next();
 });
 
