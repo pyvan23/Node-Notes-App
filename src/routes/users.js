@@ -22,7 +22,7 @@ router.get("/users/signup", (req, res) => {
 router.post("/users/signup", async (req, res) => {
   const { name, email, password, confirm_password } = req.body;
   const errors = [];
-  //con express validator se haria mas sencilo las validacions
+ 
   if (name <= 0) {
     errors.push({ text: "The name must be have more than one character" });
   }
@@ -41,14 +41,9 @@ router.post("/users/signup", async (req, res) => {
       confirm_password,
     });
   } else {
-    /* const emailUser = await User.findOne({ email: email });
-    if (emailUser) {
-      req.flash("error_m", "the email already used");
-      res.redirect('/users/signup')
-    }*/
-    //estoy creando un nuevo usuario,y nos entrega un objeto nuevo
+   
     const newUser = new User({ name, email, password });
-    //le cambio la propiedad password
+    
     newUser.password = await newUser.encryptPassword(password);
     await newUser.save();
     req.flash("success_m", "Registered");
