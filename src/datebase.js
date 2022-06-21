@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 //DB Connection
-const getConnection = () => {
+const getConnection =  () => {
   try {
     mongoose.connect.toString(process.env.MONGODB_URI);
     console.log("Connection to DB...");

@@ -33,7 +33,7 @@ router.post("/notes/new-note", isAuthenticated, async (req, res) => {
 
 router.get("/notes", isAuthenticated, async (req, res) => {
   //voy a consultar la base de datos Note es el esquema,nos permite operar con la bese de datos
-  //es un  proceso asincrono la consulta a la basse de datos asi que async and await
+  //es un  proceso asincrono la consulta a la basse de datos 
   const notes = await Note.find().sort({ date: "desc" });
   //la constante notes va a recibir unn arreglo
   res.render("notes/all-notes", { notes });
@@ -46,7 +46,7 @@ router.get("/notes/edit/:id", isAuthenticated, async (req, res) => {
 
 router.put("/notes/edit-note/:id", isAuthenticated, async (req, res) => {
   const { title, description } = req.body;
-  //buscamospor id y actualizamos,le pasamosel id desde el params,y actualizamos title des...
+  //buscamos por id y actualizamos,le pasamos el id desde el params,y actualizamos title des...
   await Note.findByIdAndUpdate(req.params.id, { title, description });
   req.flash("success_m", "It was updated successfully");
   res.redirect("/notes");
