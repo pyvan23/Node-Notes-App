@@ -1,4 +1,5 @@
-require('dotenv').config()
+
+
 const express = require("express");
 const path = require("path");
 const exphbs = require("express-handlebars");
@@ -8,11 +9,12 @@ const flash = require("connect-flash");
 const handlebars = require("handlebars");
 const passport = require("passport");
 const  {getConnection}  = require("./datebase");
+require('dotenv').config({ path: path.resolve(__dirname, './.env') });
 
-//initialization
-getConnection();
-const app = express();
-require("./config/passport");
+ //initialization
+ const app = express();
+ require("./config/passport");
+ getConnection()
 
 //Setting
 
@@ -68,6 +70,6 @@ app.use(require("./routes/notes"));
 app.use(express.static(path.join(__dirname, "public")));
 
 //Server is listenning
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("The server is on port", process.env.PORT || 3000);
 });
